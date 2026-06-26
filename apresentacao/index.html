@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Cybertecnica - Apresentação de Vendas</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            950: '#030712',
+                            900: '#0B1528',
+                            800: '#112240',
+                            700: '#1E3A8A',
+                            600: '#2563EB',
+                            500: '#3B82F6',
+                            400: '#60A5FA',
+                            cyan: '#06B6D4',
+                            emerald: '#10B981',
+                            rose: '#F43F5E'
+                        }
+                    },
+                    boxShadow: {
+                        'neon-cyan': '0 0 20px rgba(6, 182, 212, 0.25)',
+                        'neon-blue': '0 0 20px rgba(37, 99, 235, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* ====== RESET SAFARI ====== */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html {
+            -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body {
+            background-color: #030712;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ====== SLIDES ====== */
+        .slide {
+            display: none;
+            opacity: 0;
+            -webkit-transition: opacity 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            -webkit-transform: scale(0.98);
+            transform: scale(0.98);
+            -webkit-flex-direction: column;
+            flex-direction: column;
+            -webkit-justify-content: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 450px;
+            min-height: 60dvh;
+            padding: 10px 0;
+        }
+        .slide.active {
+            display: -webkit-flex;
+            display: flex;
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+
+        /* ====== SCROLL ====== */
+        .custom-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: rgba(17, 34, 64, 0.3);
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #06B6D4;
+            border-radius: 3px;
+        }
+        
+        /* ====== SLIDE 14 - QUESTIONÁRIO ====== */
+        #slide-14 {
+            display: none;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+            -webkit-justify-content: flex-start;
+            justify-content: flex-start;
+            min-height: 100dvh;
+            height: auto;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 10px 0 30px 0;
+        }
+        #slide-14.active {
+            display: -webkit-flex;
+            display: flex;
+        }
+        
+        /* ====== BOTÕES ====== */
+        button,
+        .btn-click {
+            cursor: pointer;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        button:active,
+        .btn-click:active {
+            -webkit-transform: scale(0.97);
+            transform: scale(0.97);
+        }
+
+        /* ====== ANIMAÇÕES ====== */
+        @keyframes soft-pulse {
+            0%, 100% { -webkit-transform: scale(1); transform: scale(1); }
+            50% { -webkit-transform: scale(1.02); transform: scale(1.02); }
+        }
+        .pulse-soft {
+            -webkit-animation: soft-pulse 2s ease-in-out infinite;
+            animation: soft-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes ping-slow {
+            0% { opacity: 1; -webkit-transform: scale(1); transform: scale(1); }
+            100% { opacity: 0; -webkit-transform: scale(2); transform: scale(2); }
+        }
+        .animate-ping-slow {
+            -webkit-animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+            animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        /* ====== HOVER GLOW ====== */
+        .hover-glow {
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+        .hover-glow:active {
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
+            -webkit-transform: translateY(-2px);
+            transform: translateY(-2px);
+        }
+
+        /* ====== SERVICE CARD ====== */
+        .service-card {
+            position: relative;
+            overflow: hidden;
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+        .service-card:active {
+            -webkit-transform: translateY(-4px);
+            transform: translateY(-4px);
+            border-color: #06B6D4;
+        }
+
+        /* ====== QUESTIONÁRIO ====== */
+        .radio-group label {
+            cursor: pointer;
+            -webkit-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        .radio-group label:active {
+            background: rgba(6, 182, 212, 0.08);
+        }
+        .radio-group input[type="radio"]:checked + span {
+            color: #06B6D4;
+            font-weight: 600;
+        }
+        .radio-group input[type="radio"]:checked ~ .radio-bg {
+            background: rgba(6, 182, 212, 0.1);
+            border-color: #06B6D4;
+        }
+        .input-focus:focus {
+            border-color: #06B6D4;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+            outline: none;
+        }
+        .form-card {
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+        .form-card:active {
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        /* ====== CORES SAFARI ====== */
+        .text-slate-300 { color: #cbd5e1; }
+        .text-slate-400 { color: #94a3b8; }
+        .text-slate-500 { color: #64748b; }
+        .text-slate-600 { color: #475569; }
+        .bg-cyber-950 { background-color: #030712; }
+        .bg-cyber-900 { background-color: #0B1528; }
+        .bg-cyber-800 { background-color: #112240; }
+
+        /* ====== RESPONSIVO ====== */
+        @media screen and (max-width: 768px) {
+            .slide {
+                min-height: 50dvh;
+                padding: 5px 0;
+            }
+            #slide-14 {
+                min-height: 100dvh;
+                padding: 5px 0 20px 0;
+            }
+            .text-7xl {
+                font-size: 2.5rem;
+                line-height: 1.1;
+            }
+            .text-5xl {
+                font-size: 2rem;
+                line-height: 1.1;
+            }
+            .text-4xl {
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+            .text-3xl {
+                font-size: 1.5rem;
+                line-height: 1.2;
+            }
+            .text-2xl {
+                font-size: 1.25rem;
+                line-height: 1.3;
+            }
+            .px-6 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .py-6 {
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+            .gap-4 {
+                gap: 0.75rem;
+            }
+            .p-6 {
+                padding: 1rem;
+            }
+            .p-8 {
+                padding: 1.25rem;
+            }
+            .radio-group .px-4 {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+            .radio-group .py-2 {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+            .radio-group .text-sm {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .slide {
+                min-height: 45dvh;
+            }
+            #slide-14 {
+                min-height: 100dvh;
+            }
+            .text-7xl {
+                font-size: 2rem;
+            }
+            .text-5xl {
+                font-size: 1.6rem;
+            }
+            .text-4xl {
+                font-size: 1.4rem;
+            }
+            .text-3xl {
+                font-size: 1.2rem;
+            }
+            .gap-3 {
+                gap: 0.5rem;
+            }
+            .gap-4 {
+                gap: 0.6rem;
+            }
+        }
+
+        /* ====== CORREÇÃO PARA SAFARI ====== */
+        .flex {
+            display: -webkit-flex;
+            display: flex;
+        }
+        .flex-col {
+            -webkit-flex-direction: column;
+            flex-direction: column;
+        }
+        .flex-wrap {
+            -webkit-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+        .items-center {
+            -webkit-align-items: center;
+            align-items: center;
+        }
+        .justify-center {
+            -webkit-justify-content: center;
+            justify-content: center;
+        }
+        .justify-between {
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+        }
+        .flex-grow {
+            -webkit-flex-grow: 1;
+            flex-grow: 1;
+        }
+        .grid {
+            display: -webkit-grid;
+            display: grid;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== INDICADOR DE PROGRESSO ====== -->
+    <div class="fixed top-0 left-0 w-full h-1.5 bg-cyber-900 z-50">
+        <div id="progressBar" class="h-full bg-gradient-to-r from-cyber-500 via-cyber-cyan to-cyber-emerald transition-all duration-300" style="width: 7.14%;"></div>
+    </div>
+
+    <!-- ====== HEADER ====== -->
+    <header class="w-full max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center z-10">
+        <div class="flex items-center gap-2 md:gap-3">
+            <div>
+                <span class="text-lg md:text-xl font-extrabold tracking-wider text-white">CYBER<span class="text-cyber-cyan">TECNICA</span></span>
+                <span class="block text-[8px] md:text-[9px] font-mono tracking-[0.2em] md:tracking-[0.25em] text-cyber-400">SAFETY INTELLIGENCE</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-3 md:gap-6 text-xs md:text-sm text-slate-400">
+            <span class="hidden sm:inline-flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-cyber-emerald animate-ping-slow"></span> Monitoramento
+            </span>
+            <button onclick="toggleGridOverview()" class="p-1.5 md:p-2 hover:bg-cyber-800 rounded-lg text-slate-300 hover:text-cyber-cyan transition-all" title="Ver todos os slides">
+                <i class="fa-solid fa-grip-vertical text-base md:text-lg"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ====== MAIN ====== -->
+    <main class="flex-grow w-full max-w-7xl mx-auto px-3 md:px-6 flex items-center justify-center relative py-2 md:py-6">
+
+        <!-- SLIDE 1: CAPA -->
+        <div class="slide active flex-col justify-center items-center text-center w-full relative" id="slide-1">
+            <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-64 md:w-96 h-64 md:h-96 bg-cyber-600/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none"></div>
+            <div class="absolute bottom-0 right-5 md:right-10 w-48 md:w-80 h-48 md:h-80 bg-cyber-cyan/5 rounded-full blur-[60px] md:blur-[100px] pointer-events-none"></div>
+
+            <div class="inline-flex items-center gap-2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-cyber-800/80 border border-cyber-700 text-[10px] md:text-xs font-mono text-cyber-cyan mb-4 md:mb-8 uppercase tracking-widest animate-pulse">
+                <i class="fa-solid fa-shield-halved"></i> Proposta de Blindagem 2026
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-none mb-3 md:mb-4">
+                Protegendo o que realmente importa:<br>
+                <span class="bg-gradient-to-r from-cyber-400 via-cyber-cyan to-cyber-emerald bg-clip-text text-transparent">O Futuro do seu Negócio</span>
+            </h1>
+
+            <p class="text-base md:text-lg lg:text-xl text-slate-300 max-w-3xl leading-relaxed mb-3 md:mb-4">
+                Diagnóstico gratuito de vulnerabilidades em até 48h.
+            </p>
+
+            <p class="text-sm md:text-base text-slate-400 max-w-2xl leading-relaxed mb-6 md:mb-8">
+                Soluções estratégicas e treinamentos de Segurança da Informação sob medida para empresários e gestores.
+            </p>
+
+            <div class="flex flex-wrap gap-3 md:gap-4 justify-center">
+                <button onclick="goToSlide(14)" class="btn-click px-5 md:px-8 py-3 md:py-4 bg-gradient-to-r from-cyber-emerald to-cyber-cyan text-cyber-950 font-bold rounded-xl shadow-lg shadow-cyber-cyan/20 hover:shadow-cyber-cyan/40 transition-all flex items-center gap-2 md:gap-3 pulse-soft text-sm md:text-base">
+                    <i class="fa-solid fa-bolt"></i> QUERO MEU DIAGNÓSTICO
+                </button>
+                <button onclick="nextSlide()" class="btn-click px-5 md:px-8 py-3 md:py-4 bg-cyber-800 hover:bg-cyber-700 text-white font-medium rounded-xl border border-cyber-700 hover:border-cyber-500 transition-all flex items-center gap-2 md:gap-3 text-sm md:text-base">
+                    Conhecer a Cybertecnica <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="mt-4 md:mt-6 flex flex-wrap items-center justify-center gap-3 md:gap-4 text-[10px] md:text-xs text-slate-500">
+                <span><i class="fa-regular fa-clock text-cyber-cyan"></i> Diagnóstico em 48h</span>
+                <span><i class="fa-solid fa-lock text-cyber-emerald"></i> 100% Confidencial</span>
+                <span><i class="fa-solid fa-handshake text-cyber-cyan"></i> Sem compromisso</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: CENÁRIO DE RISCOS -->
+        <div class="slide flex-col justify-center w-full" id="slide-2">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-center w-full">
+                <div class="lg:col-span-5 space-y-4 md:space-y-6">
+                    <span class="text-[10px] md:text-xs font-mono tracking-widest text-cyber-rose uppercase font-bold"><i class="fa-solid fa-triangle-exclamation"></i> Diagnóstico Global</span>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight">O Cenário Real do Crime Digital</h2>
+                    <p class="text-sm md:text-base text-slate-300 leading-relaxed">
+                        A segurança digital é uma questão crucial de <strong>viabilidade do negócio</strong>. O perigo é silencioso, constante e extremamente caro.
+                    </p>
+                    <div class="p-3 md:p-4 bg-cyber-rose/5 border border-cyber-rose/20 rounded-xl">
+                        <p class="text-xs md:text-sm text-slate-300 font-medium">
+                            <span class="text-cyber-rose font-bold">Importante:</span> A maioria dos ciberataques explora vulnerabilidades básicas e preveníveis.
+                        </p>
+                    </div>
+                </div>
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+                    <div class="bg-cyber-800/40 border border-cyber-rose/10 hover:border-cyber-rose/30 p-5 md:p-8 rounded-2xl transition-all duration-300 relative group overflow-hidden">
+                        <div class="absolute -right-10 -bottom-10 text-cyber-rose/5 text-8xl md:text-9xl font-bold font-sans pointer-events-none group-hover:scale-110 transition-transform">10T</div>
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-cyber-rose/15 flex items-center justify-center text-cyber-rose mb-4 md:mb-6 text-base md:text-xl">
+                            <i class="fa-solid fa-chart-line-down"></i>
+                        </div>
+                        <h3 class="text-3xl md:text-5xl font-black text-white mb-1 md:mb-2 font-mono">US$ 10.5T</h3>
+                        <p class="text-sm md:text-base text-slate-300 font-semibold mb-1">Custo Anual do Cibercrime</p>
+                        <p class="text-xs md:text-sm text-slate-400">Previsão global que supera o PIB de grandes nações.</p>
+                    </div>
+                    <div class="bg-cyber-800/40 border border-cyber-cyan/10 hover:border-cyber-cyan/30 p-5 md:p-8 rounded-2xl transition-all duration-300 relative group overflow-hidden">
+                        <div class="absolute -right-10 -bottom-10 text-cyber-cyan/5 text-8xl md:text-9xl font-bold font-sans pointer-events-none group-hover:scale-110 transition-transform">3.7K</div>
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-cyber-cyan/15 flex items-center justify-center text-cyber-cyan mb-4 md:mb-6 text-base md:text-xl">
+                            <i class="fa-solid fa-shield-virus"></i>
+                        </div>
+                        <h3 class="text-3xl md:text-5xl font-black text-white mb-1 md:mb-2 font-mono">3.736</h3>
+                        <p class="text-sm md:text-base text-slate-300 font-semibold mb-1">Ataques Semanais no Brasil</p>
+                        <p class="text-xs md:text-sm text-slate-400">Brasil é um dos principais alvos de ransomware.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: IMPACTOS -->
+        <div class="slide flex-col justify-center w-full" id="slide-3">
+            <div class="text-center max-w-3xl mx-auto mb-6 md:mb-10">
+                <span class="text-[10px] md:text-xs font-mono tracking-widest text-cyber-cyan uppercase font-bold"><i class="fa-solid fa-hourglass-half"></i> Impactos Diretos</span>
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mt-2">O que está em jogo para a sua empresa?</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 w-full">
+                <div class="bg-cyber-800/50 border border-cyber-700/50 rounded-2xl p-5 md:p-6 hover:border-cyber-cyan/30 transition-all hover-glow">
+                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-cyber-rose/10 text-cyber-rose flex items-center justify-center text-base md:text-lg mb-4 md:mb-6"><i class="fa-solid fa-circle-dollar-to-slot"></i></div>
+                    <h3 class="text-base md:text-lg font-bold text-white mb-2 md:mb-3">Prejuízo Financeiro Direto</h3>
+                    <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
+                        Parada operacional, custos de resgate, reconstrução de servidores e multas da LGPD.
+                    </p>
+                </div>
+                <div class="bg-cyber-800/50 border border-cyber-700/50 rounded-2xl p-5 md:p-6 hover:border-cyber-cyan/30 transition-all hover-glow">
+                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-cyber-rose/10 text-cyber-rose flex items-center justify-center text-base md:text-lg mb-4 md:mb-6"><i class="fa-solid fa-handshake-slash"></i></div>
+                    <h3 class="text-base md:text-lg font-bold text-white mb-2 md:mb-3">Quebra de Confiança</h3>
+                    <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
+                        Um vazamento corrói a reputação construída ao longo de anos. Clientes migram para concorrentes seguros.
+                    </p>
+                </div>
+                <div class="bg-cyber-800/50 border border-cyber-700/50 rounded-2xl p-5 md:p-6 hover:border-cyber-cyan/30 transition-all hover-glow">
+                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-cyber-rose/10 text-cyber-rose flex items-center justify-center text-base md:text-lg mb-4 md:mb-6"><i class="fa-solid fa-gavel"></i></div>
+                    <h3 class="text-base md:text-lg font-bold text-white mb-2 md:mb-3">Responsabilidade Civil</h3>
+                    <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
+                        Vazamento de dados gera processos trabalhistas, contratuais e judiciais complexos.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: QUEM SOMOS -->
+        <div class="slide flex-col justify-center w-full" id="slide-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center w-full">
+                <div>
+                    <div class="relative w-full max-w-[300px] md:max-w-[400px] mx-auto lg:mx-0">
+                        <svg viewBox="0 0 400 400" class="w-full h-auto drop-shadow-neon-cyan">
+                            <defs>
+                                <pattern id="hex-grid" width="30" height="30" patternUnits="userSpaceOnUse">
+                                    <path d="M15 0 L30 8.6 L30 25.8 L15 34.4 L0 25.8 L0 8.6 Z" fill="none" stroke="rgba(6, 182, 212, 0.08)" stroke-width="1" />
+                                </pattern>
+                            </defs>
+                            <rect width="400" height="400" fill="url(#hex-grid)" rx="20" />
+                            <circle cx="200" cy="200" r="140" fill="none" stroke="rgba(37, 99, 235, 0.15)" stroke-width="1.5" stroke-dasharray="8, 8"/>
+                            <circle cx="200" cy="200" r="100" fill="none" stroke="rgba(6, 182, 212, 0.2)" stroke-width="2"/>
+                            <path d="M200,90 C200,90 280,110 280,170 C280,240 200,290 200,290 C200,290 120,240 120,170 C120,110 200,90 200,90 Z" fill="rgba(11, 21, 40, 0.85)" stroke="#06B6D4" stroke-width="4" />
+                            <path d="M200,115 C200,115 260,130 260,175 C260,225 200,265 200,265 C200,265 140,225 140,175 C140,130 200,115 200,115 Z" fill="none" stroke="#2563EB" stroke-width="2" stroke-dasharray="4, 4"/>
+                            <path d="M170,195 L190,215 L230,175" fill="none" stroke="#10B981" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="space-y-4 md:space-y-6">
+                    <span class="text-[10px] md:text-xs font-mono tracking-widest text-cyber-cyan uppercase font-bold"><i class="fa-solid fa-fingerprint"></i> Cybertecnica</span>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight">Sua Fortaleza de Defesa Digital</h2>
+                    <p class="text-sm md:text-base text-slate-300 leading-relaxed">
+                        A Cybertecnica nasceu com uma missão clara: descomplicar a cibersegurança e trazê-la de forma estratégica e acessível para o ecossistema empresarial.
+                    </p>
+                    <p class="text-sm md:text-base text-slate-300 leading-relaxed">
+                        Combinamos tecnologias abertas confiáveis com treinamento direcionado para o recurso mais vulnerável: o ser humano.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 pt-4 border-t border-cyber-800">
+                        <div>
+                            <span class="block text-xl md:text-2xl font-bold text-cyber-emerald">100%</span>
+                            <span class="text-[10px] md:text-xs text-slate-400">Comprometimento Técnico</span>
+                        </div>
+                        <div>
+                            <span class="block text-xl md:text-2xl font-bold text-cyber-cyan">Foco</span>
+                            <span class="text-[10px] md:text-xs text-slate-400">Mitigação de Impacto</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: PILARES -->
+        <div class="slide flex-col justify-center w-full" id="slide-5">
+            <div class="text-center max-w-3xl mx-auto mb-6 md:mb-10">
+                <span class="text-[10px] md:text-xs font-mono tracking-widest text-cyber-cyan uppercase font-bold"><i class="fa-solid fa-list-check"></i> Nosso Escopo</span>
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mt-2">Nossos Pilares de Proteção</h2>
+                <p class="text-slate-400 mt-1 md:mt-2 text-xs md:text-sm">Clique em qualquer serviço para mais detalhes</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 w-full">
+                <button onclick="goToSlide(6)" class="service-card bg-cyber-800/40 border border-cyber-700 hover:border-cyber-cyan rounded-2xl p-3 md:p-5 text-left transition-all hover:-translate-y-1">
+                    <div class="icon-wrapper w-8 h-8 md:w-10 md:h-10 rounded-lg bg-cyber-cyan/15 text-cyber-cyan flex items-center justify-center text-base md:text-lg mb-2 md:mb-3"><i class="fa-solid fa-network-wired"></i></div>
+                    <h3 class="text-[11px] md:text-sm font-bold text-white mb-0.5 md:mb-1">Vulnerabilidades</h3>
+                    <p class="text-[9px] md:text-xs text-slate-400 leading-relaxed hidden sm:block">Varreduras com Nmap</p>
+                    <div class="mt-1 md:mt-2 pt-1 md:pt-2 border-t border-cyber-800/50">
+                        <p class="text-[8px] md:text-[10px] text-cyber-cyan/70 leading-relaxed">
+                            <i class="fa-solid fa-shield-halved mr-1"></i> Protege contra invasões
+                        </p>
+                    </div>
+                </button>
+                <button onclick="goToSlide(7)" class="service-card bg-cyber-800/40 border border-cyber-700 hover:border-cyber-cyan rounded-2xl p-3 md:p-5 text-left transition-all hover:-translate-y-1">
+                    <div class="icon-wrapper w-8 h-8 md:w-10 md:h-10 rounded-lg bg-cyber-500/15 text-cyber-500 flex items-center justify-center text-base md:text-lg mb-2 md:mb-3"><i class="fa-solid fa-envelope-shield"></i></div>
+                    <h3 class="text-[11px] md:text-sm font-bold text-white mb-0.5 md:mb-1">E-mails Seguros</h3>
+                    <p class="text-[9px] md:text-xs text-slate-400 leading-relaxed hidden sm:block">ProtonMail + 2FA</p>
+                    <div class="mt-1 md:mt-2 pt-1 md:pt-2 border-t border-cyber-800/50">
+                        <p class="text-[8px] md:text-[10px] text-cyber-cyan/70 leading-relaxed">
+                            <i class="fa-solid fa-shield-halved mr-1"></i> Protege contra fraudes
+                        </p>
+                    </div>
+                </button>
+                <button onclick="goToSlide(8)" class="service-card bg-cyber-800/40 border border-cyber-700 hover:border-cyber-cyan rounded-2xl p-3 md:p-5 text-left transition-all hover:-translate-y-1">
+                    <div class="icon-wrapper w-8 h-8 md:w-10 md:h-10 rounded-lg bg-cyber-emerald/15 text-cyber-emerald flex items-center justify-center text-base md:text-lg mb-2 md:mb-3"><i class="fa-solid fa-shield"></i></div>
+                    <h3 class="text-[11px] md:text-sm font-bold text-white mb-0.5 md:mb-1">Firewall</h3>
+                    <p class="text-[9px] md:text-xs text-slate-400 leading-relaxed hidden sm:block">pfSense + UFW</p>
+                    <div class="mt-1 md:mt-2 pt-1 md:pt-2 border-t border-cyber-800/50">
+                        <p class="text-[8px] md:text-[10px] text-cyber-cyan/70 leading-relaxed">
+                            <i class="fa-solid fa-shield-halved mr-1"></i> Protege contra invasores
+                        </p>
+                    </div>
+                </button>
+                <button onclick="goToSlide(9)" class="service-card bg-cyber-800/40 border border-cyber-700 hover:border-cyber-cyan rounded-2xl p-3 md:p-5 text-left transition-all hover:-translate-y-1">
+                    <div class="icon-wrapper w-8 h-8 md:w-10 md:h-10 rounded-lg bg-indigo-500/15 text-indigo-400 flex items-center justify-center text-base md:text-lg mb-2 md:mb-3"><i class="fa-solid fa-vault"></i></div>
+                    <h3 class="text-[11px] md:text-sm font-bold text-white mb-0.5 md:mb-1">Criptografia</h3>
+                    <p class="text-[9px] md:text-xs text-slate-400 leading-relaxed hidden sm:block">VeraCrypt</p>
+                    <div class="mt-1 md:mt-2 pt-1 md:pt-2 border-t border-cyber-800/50">
+                        <p class="text-[8px] md:text-[10px] text-cyber-cyan/70 leading-relaxed">
+                            <i class="fa-solid fa-shield-halved mr-1"></i> Protege dados sigilosos
+                        </p>
+                    </div>
+                </button>
+                <button onclick="goToSlide(10)" class="service-card bg-cyber-800/40 border border-cyber-700 hover:border-cyber-cyan rounded-2xl p-3 md:p-5 text-left transition-all hover:-translate-y-1">
+                    <div class="icon-wrapper w-8 h-8 md:w-10 md:h-10 rounded-lg bg-amber-500/15 text-amber-500 flex items-center justify-center text-base md:text-lg mb-2 md:mb-3"><i class="fa-solid fa-user-shield"></i></div>
+                    <h3 class="text-[11px] md:text-sm font-bold text-white mb-0.5 md:mb-1">Treinamentos</h3>
+                    <p class="text-[9px] md:text-xs text-slate-400 leading-relaxed hidden sm:block">Phishing + Educação</p>
+                    <div class="mt-1 md:mt-2 pt-1 md:pt-2 border-t border-cyber-800/50">
+                        <p class="text-[8px] md:text-[10px] text-cyber-cyan/70 leading-relaxed">
+                            <i class="fa-solid fa-shield-halved mr-1"></i> Protege o fator humano
+                        </p>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: VULNERABILIDADES -->
+        <div class="slide flex-col justify-center w-full" id="slide-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-center w-full">
+                <div class="lg:col-span-5 space-y-4 md:space-y-6">
+                    <span class="text-[10px] md:text-xs font-mono tracking-widest text-cyber-cyan uppercase font-bold"><i class="fa-solid fa-circle-nodes"></i> Serviço Dedicado</span>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight">Análise de Vulnerabilidades</h2>
+                    <p class="text-sm md:text-base text-slate-300 leading-relaxed">
+                        Nossa equipe simula técnicas de ataque cibernético ético para mapear suas fraquezas.
+                    </p>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyber-cyan"></i> Mapeamento de IPs e portas</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyber-cyan"></i> Auditoria de serviços ativos</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyber-cyan"></i> Relatórios executivos práticos</li>
+                    </ul>
+                    <div class="p-3 bg-cyber-cyan/5 border border-cyber-cyan/20 rounded-lg">
+                        <p class="text-xs text-slate-300">
+                            <span class="text-cyber-cyan font-bold">O que protege:</span> Invasões, portas abertas, serviços expostos.
+                        </p>
+                    </div>
+                </div>
+                <div class="lg:col-span-7 bg-black rounded-2xl border border-cyber-700 p-4 md:p-5 font-mono text-[10px] md:text-xs overflow-hidden h-[300px] md:h-[380px] flex flex-col justify-between shadow-lg">
+                    <div class="flex items-center justify-between border-b border-cyber-800 pb-2 md:pb-3 mb-2 md:mb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-cyber-rose"></span>
+                            <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-yellow-500"></span>
+                            <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-cyber-emerald"></span>
+                        </div>
+                        <span class="text-[8px] md:text-[10px] text-slate-500 tracking-wider font-bold">CYBERTECNICA SCANNER v2.4</span>
+                    </div>
+                    <div id="terminal-screen" class="flex-grow space-y-1 md:space-y-2 text-cyber-emerald/90 overflow-y-auto custom-scroll pr-1 md:pr-2 leading-relaxed">
+                        <p class="text-slate-400">> host ip_target: 192.168.1.104</p>
+                        <p class="text-slate-400">> nmap -sV -F 192.168.1.104</p>
+                        <p class="text-slate-500">Starting Nmap at 12:00 BRT</p>
+                        <p class="text-cyber-cyan">[+] Port 22/tcp open (SSH)</p>
+                        <p class="text-cyber-cyan">[+] Port 80/tcp open (HTTP)</p>
+                        <p class="text-cyber-rose font-bold animate-pulse">[!] WARNING: Port 3306/tcp open (MySQL)</p>
+                        <p class="text-slate-500">Nmap done in 2.3 seconds.</p>
+                        <p class="text-white mt-2 md:mt-4 font-bold border-t border-cyber-900 pt-1 md:pt-2 text-[9px] md:text-xs">Ação Recomendada:</p>
+                        <p class="text-yellow-400 text-[9px] md:text-xs">Bloquear acessos não-autorizados à porta 3306.</p>
+                    </div>
+                    <div class="mt-3 md:mt-4 pt-2 md:pt-3 border-t border-cyber-800 flex justify-between items-center text-[8px] md:text-[10px] text-slate-500">
+                        <span>Status: IDLE</span>
+                        <button onclick="simulateNmapScan()" class="btn-click px-2 md:px-3 py-1 md:py-1.5 bg-cyber-cyan text-cyber-950 font-bold rounded hover:bg-cyber-400 transition-all text-[9px] md:text-xs">REEXECUTAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: EMAILS SEGUROS -->
+        <div class="slide flex-col justify-center w-full" id="slide-7">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-12 items-center w-full">
+                <div class="lg:col-span-7 flex justify-center items-center">
+                    <svg viewBox="0 0 500 300" class="w-full max-w-[350px] md:max-w-[450px]">
+                        <path d="M 50 150 Q 250 150 450 150" fill="none" stroke="#2563EB" stroke-width="2" stroke-dasharray="8,8"/>
+                        <g transform="translate(50, 110)">
+                            <rect x="0" y="0" width="80" height="80" rx="10" fill="#112240" stroke="#2563EB" stroke-width="2"/>
+                            <text x="40" y="45" fill="#FFFFFF" font-size="12" font-family="monospace" text-anchor="middle">Enviado</text>
+                            <i class="fa-solid fa-envelope text-white text-2xl" style="transform: translate(25px, -45px);"></i>
+                        </g>
+                        <g transform="translate(210, 30)">
+                            <circle cx="40" cy="40" r="30" fill="#0B1528" stroke="#F43F5E" stroke-width="2"/>
+                            <path d="M 40 120 L 40 70" fill="none" stroke="#F43F5E" stroke-width="2" stroke-dasharray="4,4"/>
+                            <text x="40" y="140" fill="#F43F5E" font-size="10" font-family="monospace" text-anchor="middle" font-weight="bold">INTERCEPTAÇÃO</text>
+                            <path d="M28,30 C28,20 32,15 40,15 C48,15 52,20 52,30 C52,40 47,43 45,46 L45,49 L35,49 L35,46 C33,43 28,40 28,30 Z" fill="#F43F5E"/>
+                        </g>
+                        <g transform="translate(370, 110)">
+                            <rect x="0" y="0" width="80" height="80" rx="10" fill="#112240" stroke="#10B981" stroke-width="2" class="shadow-neon-cyan"/>
+                            <text x="40" y="45" fill="#FFFFFF" font-size="12" font-family="monospace" text-anchor="middle">Criptografado</text>
+                        </g>
+                        <g transform="translate(235, 135)">
+                            <circle cx="15" cy="15" r="20" fill="#10B981" />
+                            <path d="M10,18 L10,24 L20,24 L20,18 Z M11,18 L11,14 C11,12 13,10 15,10 C17,10 19,12 19,14 L19,18 Z" fill="none" stroke="#000" stroke-width="2" />
+                        </g>
+                    </svg>
+                </div>
+                <div class="lg:col-span-5 space-y-4 md:space-y-6">
+                    <span class="text-[10px] md:text-xs font-mono tracking-widest text-cyber-cyan uppercase font-bold"><i class="fa-solid fa-key"></i> Comunicações Seguras</span>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight">E-mails Invioláveis</h2>
+                    <p class="text-sm md:text-base text-slate-300 leading-relaxed">
+                        Canais convencionais podem ser espionados ou clonados por atacantes.
+                    </p>
+                    <p class="text-sm md:text-base text-slate-300 leading-relaxed">
+                        Implementamos <strong>ProtonMail Empresarial</strong> com <strong>Autenticação 2FA</strong> e chaves criptográficas.
+                    </p>
+                    <div class="p-3 bg-cyber-cyan/5 border border-cyber-cyan/20 rounded-lg">
+                        <p class="text-xs text-slate-300">
+                            <span class="text-cyber-cyan font-bold">O que protege:</span> Interceptação, fraudes, engenharia social.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: FIREWALL -->
+        <div class="slide flex-col justify-center w-full" id="slide-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-center w-full">
+                <div class="lg:col-span-5 space-y-4 md:space-y-6">
+                    <span class="text-[10px] md:text-xs font-mono tracking-widest text-cyber-cyan uppercase font-bold"><i class="fa-solid fa-border-top-left"></i> Proteção Perimetral</span>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight">Firewalls de Elite</h2>
+                    <p class="text-sm md:text-base text-slate-300 leading-relaxed">
+                        O firewall analisa cada byte que tenta entrar ou sair de seus servidores.
+                    </p>
+                    <div class="p-3 bg-cyber-cyan/5 border border-cyber-cyan/20 rounded-lg">
+                        <p class="text-xs text-slate-300">
+                            <span class="text-cyber-cyan font-bold">O que protege:</span> Invasores, DDoS, tráfego malicioso.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 md:gap-4">
+                        <div class="p-3 md:p-4 bg-cyber-800/60 border border-cyber-700 rounded-xl text-left">
+                            <span class="block text-cyber-cyan font-bold font-mono text-xs md:text-sm mb-0.5 md:mb-1">pfSense</span>
+                            <span class="text-[9px] md:text-xs text-slate-400">Arquitetura de borda dedicada.</span>
+                        </div>
+                        <div class="p-3 md:p-4 bg-cyber-800/60 border border-cyber-700 rounded-xl text-left">
+                            <span class="block text-cyber-emerald font-bold font-mono text-xs md:text-sm mb-0.5 md:mb-1">UFW</span>
+                            <span class="text-[9px] md:text-xs text-slate-400">Proteção para cada máquina.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-7 bg-cyber-800/40 border border-cyber-700 rounded-2xl p-4 md:p-6 relative">
+                    <div class="flex items-center justify-between mb-3 md:mb-4 pb-2 md:pb-4 border-b border-cyber-800">
+                        <span class="text-[10px] md:text-xs font-mono text-slate-400">SIMULAÇÃO PFSENSE</span>
+                        <span class="px-2 py-0.5 rounded bg-cyber-emerald/10 text-cyber-emerald text-[8px] md:text-[10px] font-mono font-bold uppercase tracking-wider">FILTRO ATIVO</span>
+                    </div>
+                    <div class="space-y-2 md:space-y-3 font-mono text-[10px] md:text-xs">
+                        <div class="flex flex-wrap items-center justify-between p-2 md:p-3 bg-cyber-rose/10 border border-cyber-rose/20 rounded-xl">
+                            <div class="flex items-center gap-2 md:gap-3">
+                                <i class="fa-solid fa-circle-xmark text-cyber-rose text-base md:text-lg"></i>
+                                <div>
+                                    <span class="block text-white font-bold text-[10px] md:text-xs">IP: 203.0.113.5</span>
+                                    <span class="text-[8px] md:text-[10px] text-slate-400">Scan de Portas via SSH</span>
+                                </div>
+                            </div>
+                            <span class="px-2 py-0.5 md:px-2.5 md:py-1 rounded bg-cyber-rose/20 text-cyber-rose text-[8px] md:text-[9px] font-bold">REJEITADO</span>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between p-2 md:p-3 bg-cyber-emerald/10 border border-cyber-emerald/20 rounded-xl">
+                            <div class="flex items-center gap-2 md:gap-3">
+                                <i class="fa-solid fa-circle-check text-cyber-emerald text-base md:text-lg"></i>
+                                <div>
+                                    <span class="block text-white font-bold text-[10px] md:text-xs">IP: 189.45.12.98</span>
+                                    <span class="text-[8px] md:text-[10px] text-slate-400">Acesso VPN Admin</span>
+                                </div>
+                            </div>
+                            <span class="px-2 py-0.5 md:px-2.5 md:py-1 rounded bg-cyber-emerald/20 text-cyber-emerald text-[8px] md:text-[9px] font-bold">PERMITIDO</span>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between p-2 md:p-3 bg-cyber-rose/10 border border-cyber-rose/20 rounded-xl">
+                            <div class="flex items-center gap-2 md:gap-3">
+                                <i class="fa-solid fa-circle-xmark text-cyber-rose text-base md:text-lg"></i>
+                                <div>
+                                    <span class="block text-white font-bold text-[10px] md:text-xs">IP: Interno → Externo</span>
+                                    <span class="text-[8px] md:text-[10px] text-slate-400">Vazamento de logs</span>
+                                </div>
+                            </div>
+                            <span class="px-2 py-0.5 md:px-2.5 md:py-1 rounded bg-cyber-rose/20 text-cyber-rose text-[8px] md:text-[9px] font-bold">REJEITADO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: CRIPTOGRAFIA -->
+        <div class="slide flex-col justify-center w-full" id="slide-9">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-12 items-center w-full">
+                <div class="lg:col-span-7 bg-cyber-800/30 border border-cyber-700 rounded-2xl p-5 md:p-6 text-center">
+                    <div class="w-20 h-20 md:w-24 md:h-24 mx-auto mb-4 md:mb-6 bg-cyber-cyan/15 rounded-full flex items-center justify-center border border-cyber-cyan/30 shadow-neon-cyan">
+                        <i id="vault-icon" class="fa-solid fa-lock text-cyber-cyan text-3xl md:text-4xl transition-all duration-300"></i>
+                    </div>
+                    <h3 class="text-base md:text-xl font-bold text-white mb-1 md:mb-2">Simulador VeraCrypt</h3>
+                    <p class="text-[10px] md:text-xs text-slate-400 max-w-md mx-auto mb-4 md:mb-6">
+                        Se o notebook for roubado, ninguém quebrará a criptografia militar.
+                    </p>
+                    <div id="vault-status-box" class="p-3 md:p-4 bg-cyber-rose/5 border border-cyber-rose/20 rounded-xl max-w-md mx-auto mb-4 md:mb-6">
+                        <p class="text-xs md:text-sm font-semibold text-white">Status: <span id="vault-status-text" class="text-cyber-rose font-bold">DESBLINDADO</span></p>
+                        <p class="text-[9px] md:text-xs text-slate-400 mt-1">Arquivos expostos à leitura de intrusos.</p>
+                    </div>
+                    <button onclick="toggleVaultCriptografia()" id="vault-btn" class="btn-click px-4 md:px-6 py-2 md:py-3 bg-cyber-cyan text-cyber-950 font-bold rounded-xl shadow-lg hover:bg-cyber-400 transition-all font-mono text-[10px] md:text-sm">
+                        ATIVAR BLINDAGEM AES-256
+                    </button>
+                </div>
+                <div class="lg:col-span-5 space-y-4 md:space-y-6">
+                    <span class="text-[10px] md:text-xs font-mono tracking-widest text-cyber-cyan uppercase font-bold"><i class="fa-solid fa-vault"></i> Proteção Física</span>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight">Criptografia Local</h2>
+                    <p class="text-sm md:text-base text-slate-300 leading-relaxed">
+                        Ransomware e roubo de notebooks podem expor seus segredos industriais.
+                    </p>
+                    <p class="text-sm md:text-base text-slate-300 leading-relaxed">
+                        Usamos <strong>VeraCrypt</strong> para criar cofres digitais criptografados.
+                    </p>
+                    <div class="p-3 bg-cyber-cyan/5 border border-cyber-cyan/20 rounded-lg">
+                        <p class="text-xs text-slate-300">
+                            <span class="text-cyber-cyan font-bold">O que protege:</span> Roubo de dispositivos, ransomware, espionagem.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 10: TREINAMENTOS -->
+        <div class="slide flex-col justify-center w-full" id="slide-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-center w-full">
+                <div class="lg:col-span-5 space-y-4 md:space-y-6">
+                    <span class="text-[10px] md:text-xs font-mono tracking-widest text-cyber-cyan uppercase font-bold"><i class="fa-solid fa-graduation-cap"></i> Fator Humano</span>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight">Treinamento Anti-Golpes</h2>
+                    <p class="text-sm md:text-base text-slate-300 leading-relaxed">
+                        É mais fácil convencer um funcionário a entregar sua senha do que invadir um sistema blindado.
+                    </p>
+                    <div class="p-3 bg-cyber-cyan/5 border border-cyber-cyan/20 rounded-lg">
+                        <p class="text-xs text-slate-300">
+                            <span class="text-cyber-cyan font-bold">O que protege:</span> Erro humano, phishing, engenharia social.
+                        </p>
+                    </div>
+                    <ul class="space-y-1.5 md:space-y-2 text-xs md:text-sm text-slate-300">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-user-shield text-cyber-cyan"></i> <strong>Phishing Controlado:</strong> Testes em cenários reais</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-user-shield text-cyber-cyan"></i> <strong>Engenharia Social:</strong> Como identificar pressões</li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-7 bg-cyber-800/50 border border-cyber-700 rounded-2xl p-4 md:p-6">
+                    <div class="flex items-center justify-between mb-3 md:mb-4 pb-2 border-b border-cyber-800">
+                        <h4 class="text-[10px] md:text-xs font-bold text-white uppercase"><i class="fa-solid fa-envelope-open-text text-yellow-500 mr-2"></i> Você detectaria este phishing?</h4>
+                        <span class="text-[8px] md:text-[10px] font-mono text-slate-400">DESAFIO</span>
+                    </div>
+                    <div class="bg-black/50 p-3 md:p-4 rounded-xl border border-cyber-800 font-sans text-[10px] md:text-xs mb-3 md:mb-4">
+                        <div class="mb-2 text-slate-400">
+                            <strong>De:</strong> financeiro-itau@secure-server-br.com <span class="text-red-500 font-semibold text-[8px] md:text-[10px] font-mono">(SUSPEITO!)</span><br>
+                            <strong>Assunto:</strong> <span class="font-bold text-white">[URGENTE] Bloqueio de Token</span>
+                        </div>
+                        <div class="p-2 md:p-3 bg-cyber-900 border border-cyber-800 text-slate-300 my-2 md:my-3 leading-relaxed text-[9px] md:text-xs">
+                            Detectamos acesso suspeito. <strong>Regularize seu token nas próximas 2 horas.</strong><br>
+                            <span class="inline-block px-3 md:px-4 py-1.5 md:py-2 bg-blue-600 text-white font-bold rounded text-[9px] md:text-xs">Sincronizar Token Agora</span>
+                        </div>
+                    </div>
+                    <div class="p-2 md:p-3 bg-cyber-emerald/10 border border-cyber-emerald/20 rounded-xl text-[9px] md:text-xs">
+                        <span class="block text-cyber-emerald font-bold mb-1"><i class="fa-solid fa-lightbulb"></i> Elementos identificados:</span>
+                        <p class="text-slate-300">1. Domínio falso 2. Urgência psicológica 3. Link para captura de dados</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 11: DIFERENCIAIS -->
+        <div class="slide flex-col justify-center w-full" id="slide-11">
+            <div class="text-center max-w-3xl mx-auto mb-6 md:mb-10">
+                <span class="text-[10px] md:text-xs font-mono tracking-widest text-cyber-cyan uppercase font-bold"><i class="fa-solid fa-rocket"></i> Nosso Compromisso</span>
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mt-2">Diferenciais e Entregas</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 w-full">
+                <div class="bg-cyber-800/40 border border-cyber-700 rounded-2xl p-5 md:p-6 hover:border-cyber-cyan/30 transition-all hover-glow">
+                    <h3 class="text-base md:text-xl font-bold text-white mb-4 md:mb-6 flex items-center gap-3">
+                        <i class="fa-solid fa-folder-open text-cyber-cyan"></i> O que Você Recebe
+                    </h3>
+                    <ul class="space-y-3 md:space-y-4 text-xs md:text-sm text-slate-300">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-square-check text-cyber-emerald mt-1"></i>
+                            <div>
+                                <strong class="text-white">Relatório de Vulnerabilidades:</strong>
+                                <span class="block text-[10px] md:text-xs text-slate-400">Visão técnica de todos os gargalos.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-square-check text-cyber-emerald mt-1"></i>
+                            <div>
+                                <strong class="text-white">Chaves VeraCrypt:</strong>
+                                <span class="block text-[10px] md:text-xs text-slate-400">Cofres digitais criptografados.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-square-check text-cyber-emerald mt-1"></i>
+                            <div>
+                                <strong class="text-white">Manual de Segurança:</strong>
+                                <span class="block text-[10px] md:text-xs text-slate-400">Guia para novas contratações.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-cyber-800/40 border border-cyber-700 rounded-2xl p-5 md:p-6 hover:border-cyber-cyan/30 transition-all hover-glow">
+                    <h3 class="text-base md:text-xl font-bold text-white mb-4 md:mb-6 flex items-center gap-3">
+                        <i class="fa-solid fa-bolt text-cyber-cyan"></i> Por que a Cybertecnica?
+                    </h3>
+                    <ul class="space-y-3 md:space-y-4 text-xs md:text-sm text-slate-300">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-handshake text-cyber-cyan mt-1"></i>
+                            <div>
+                                <strong class="text-white">Atendimento Ágil:</strong>
+                                <span class="block text-[10px] md:text-xs text-slate-400">Fale diretamente com o especialista.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-coins text-cyber-emerald mt-1"></i>
+                            <div>
+                                <strong class="text-white">Custo-Benefício:</strong>
+                                <span class="block text-[10px] md:text-xs text-slate-400">Tecnologias open source sem licenças caras.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-graduation-cap text-cyber-cyan mt-1"></i>
+                            <div>
+                                <strong class="text-white">Capacitação:</strong>
+                                <span class="block text-[10px] md:text-xs text-slate-400">Ensinamos sua equipe a se defender.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 12: CREDIBILIDADE -->
+        <div class="slide flex-col justify-center w-full" id="slide-12">
+            <div class="text-center max-w-3xl mx-auto mb-6 md:mb-10">
+                <span class="text-[10px] md:text-xs font-mono tracking-widest text-cyber-cyan uppercase font-bold"><i class="fa-solid fa-certificate"></i> Credibilidade</span>
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mt-2">Por que confiar na Cybertecnica?</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 w-full">
+                <div class="bg-cyber-800/50 border border-cyber-700/50 rounded-2xl p-5 md:p-6 text-center hover:border-cyber-cyan/30 transition-all hover-glow">
+                    <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-cyber-cyan/15 flex items-center justify-center text-cyber-cyan text-2xl md:text-3xl mx-auto mb-3 md:mb-4">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">Especialização Técnica</h3>
+                    <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
+                        Nmap, pfSense, UFW, VeraCrypt, ProtonMail — usados por agências governamentais.
+                    </p>
+                </div>
+                <div class="bg-cyber-800/50 border border-cyber-700/50 rounded-2xl p-5 md:p-6 text-center hover:border-cyber-cyan/30 transition-all hover-glow">
+                    <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-cyber-emerald/15 flex items-center justify-center text-cyber-emerald text-2xl md:text-3xl mx-auto mb-3 md:mb-4">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">Metodologia Comprovada</h3>
+                    <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
+                        Seguimos NIST e ISO 27001, adaptados para a realidade brasileira.
+                    </p>
+                </div>
+                <div class="bg-cyber-800/50 border border-cyber-700/50 rounded-2xl p-5 md:p-6 text-center hover:border-cyber-cyan/30 transition-all hover-glow">
+                    <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-cyber-rose/15 flex items-center justify-center text-cyber-rose text-2xl md:text-3xl mx-auto mb-3 md:mb-4">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
+                    <h3 class="text-base md:text-lg font-bold text-white mb-1 md:mb-2">Compromisso com o Cliente</h3>
+                    <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
+                        Atendimento personalizado, linguagem clara, foco em resultados.
+                    </p>
+                </div>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4 md:gap-8 mt-6 md:mt-8 opacity-70">
+                <div class="text-center">
+                    <i class="fa-brands fa-linux text-2xl md:text-3xl text-slate-500"></i>
+                    <p class="text-[9px] md:text-xs text-slate-500 mt-1">Linux Foundation</p>
+                </div>
+                <div class="text-center">
+                    <i class="fa-solid fa-shield-halved text-2xl md:text-3xl text-slate-500"></i>
+                    <p class="text-[9px] md:text-xs text-slate-500 mt-1">Open Source Security</p>
+                </div>
+                <div class="text-center">
+                    <i class="fa-solid fa-lock text-2xl md:text-3xl text-slate-500"></i>
+                    <p class="text-[9px] md:text-xs text-slate-500 mt-1">LGPD Compliance</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 13: CONTATO -->
+        <div class="slide flex-col justify-center items-center text-center w-full relative" id="slide-13">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 md:w-96 h-64 md:h-96 bg-cyber-emerald/5 rounded-full blur-[80px] md:blur-[120px] pointer-events-none"></div>
+
+            <span class="inline-flex items-center gap-2 px-3 md:px-4 py-1 md:py-1.5 rounded-full bg-cyber-emerald/10 border border-cyber-emerald/20 text-[10px] md:text-xs font-mono text-cyber-emerald uppercase tracking-widest mb-3 md:mb-4">
+                <i class="fa-solid fa-circle-play"></i> Diagnóstico Gratuito
+            </span>
+
+            <h2 class="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-2 md:mb-3 leading-tight">
+                Pronto para <span class="bg-gradient-to-r from-cyber-emerald to-cyber-cyan bg-clip-text text-transparent">Blindar</span> seu Negócio?
+            </h2>
+
+            <p class="text-sm md:text-base text-slate-300 max-w-2xl mb-4 md:mb-6 leading-relaxed">
+                Agende agora seu diagnóstico gratuito e descubra em <strong class="text-white">48 horas</strong> as brechas da sua empresa.
+            </p>
+
+            <div id="timer-container" class="flex flex-wrap items-center justify-center gap-1 md:gap-2 text-cyber-cyan font-mono text-[10px] md:text-sm bg-cyber-800/30 px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-cyber-700/50 mb-4 md:mb-6">
+                <i class="fa-solid fa-clock"></i>
+                <span>Oferta exclusiva — </span>
+                <span id="countdown-timer" class="font-bold text-white">23:59:59</span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 md:gap-4 max-w-2xl mx-auto mb-4 md:mb-6">
+                <div class="bg-cyber-800/30 border border-cyber-700/30 rounded-xl p-2 md:p-3 text-center">
+                    <span class="block text-xl md:text-2xl font-bold text-cyber-cyan">48h</span>
+                    <span class="text-[8px] md:text-[10px] text-slate-400">Diagnóstico concluído</span>
+                </div>
+                <div class="bg-cyber-800/30 border border-cyber-700/30 rounded-xl p-2 md:p-3 text-center">
+                    <span class="block text-xl md:text-2xl font-bold text-cyber-emerald">100%</span>
+                    <span class="text-[8px] md:text-[10px] text-slate-400">Confidencialidade</span>
+                </div>
+                <div class="bg-cyber-800/30 border border-cyber-700/30 rounded-xl p-2 md:p-3 text-center">
+                    <span class="block text-xl md:text-2xl font-bold text-cyber-cyan">Open Source</span>
+                    <span class="text-[8px] md:text-[10px] text-slate-400">Sem custos ocultos</span>
+                </div>
+            </div>
+
+            <div class="bg-cyber-800/30 border border-cyber-700/30 rounded-xl p-3 md:p-4 max-w-2xl mx-auto mb-4 md:mb-6">
+                <div class="flex items-center gap-2 md:gap-3 mb-1 md:mb-2">
+                    <i class="fa-solid fa-chart-line text-cyber-cyan"></i>
+                    <span class="text-[9px] md:text-xs font-mono text-slate-400 uppercase tracking-wider">Em construção</span>
+                </div>
+                <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
+                    <strong class="text-white">Primeiros clientes já estão em processo de blindagem.</strong>
+                    Seja um dos primeiros a experimentar nossa metodologia.
+                </p>
+                <div class="mt-2 md:mt-3 flex flex-wrap items-center justify-center gap-1.5 md:gap-2">
+                    <span class="px-2 md:px-3 py-0.5 md:py-1 bg-cyber-cyan/10 text-cyber-cyan text-[8px] md:text-[10px] rounded-full font-mono border border-cyber-cyan/20">Projeto piloto</span>
+                    <span class="px-2 md:px-3 py-0.5 md:py-1 bg-cyber-emerald/10 text-cyber-emerald text-[8px] md:text-[10px] rounded-full font-mono border border-cyber-emerald/20">+2 empresas</span>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3 md:gap-4 justify-center mb-4 md:mb-6">
+                <button onclick="goToSlide(14)" class="btn-click px-5 md:px-8 py-3 md:py-4 bg-gradient-to-r from-cyber-emerald to-cyber-cyan text-cyber-950 font-bold rounded-xl shadow-lg shadow-cyber-cyan/20 hover:shadow-cyber-cyan/40 transition-all flex items-center gap-2 md:gap-3 pulse-soft text-sm md:text-base">
+                    <i class="fa-solid fa-clipboard-list"></i> PREENCHER QUESTIONÁRIO
+                </button>
+                <a href="https://wa.me/5541998548591?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20Cybertecnica." 
+                   target="_blank" 
+                   class="btn-click px-5 md:px-8 py-3 md:py-4 bg-cyber-800 hover:bg-cyber-700 text-white font-medium rounded-xl border border-cyber-700 hover:border-cyber-500 transition-all flex items-center gap-2 md:gap-3 text-sm md:text-base">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center gap-3 md:gap-6 text-[10px] md:text-sm text-slate-400 mb-3 md:mb-4">
+                <span><i class="fa-solid fa-phone text-cyber-cyan mr-1 md:mr-2"></i> (41) 99854-8591</span>
+                <span><i class="fa-regular fa-envelope text-cyber-cyan mr-1 md:mr-2"></i> joaogilbertosolano@gmail.com</span>
+                <span><i class="fa-regular fa-clock text-cyber-cyan mr-1 md:mr-2"></i> Seg-Sex, 9h-18h</span>
+            </div>
+
+            <div class="bg-cyber-800/20 border border-cyber-700/30 rounded-xl p-2 md:p-3 max-w-2xl mx-auto">
+                <p class="text-[9px] md:text-[11px] text-slate-500 leading-relaxed flex items-center justify-center gap-1 md:gap-2">
+                    <i class="fa-solid fa-shield-halved text-cyber-cyan"></i>
+                    <strong>Sem pegadinhas:</strong> Diagnóstico 100% sem compromisso.
+                </p>
+            </div>
+        </div>
+
+        <!-- SLIDE 14: QUESTIONÁRIO -->
+        <div class="slide flex-col justify-start w-full overflow-y-auto custom-scroll" id="slide-14">
+            <div class="w-full max-w-4xl mx-auto py-4 md:py-6 px-3 md:px-4">
+                
+                <div class="text-center mb-4 md:mb-8">
+                    <div class="inline-flex items-center gap-2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-cyber-800/80 border border-cyber-700 text-[9px] md:text-xs font-mono text-cyber-cyan mb-3 md:mb-4 uppercase tracking-widest">
+                        <i class="fa-solid fa-clipboard-list"></i> Pré-Diagnóstico
+                    </div>
+                    <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1 md:mb-2">
+                        Como está a <span class="bg-gradient-to-r from-cyber-400 via-cyber-cyan to-cyber-emerald bg-clip-text text-transparent">Segurança</span> da sua Empresa?
+                    </h2>
+                    <p class="text-xs md:text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                        Responda e receba um <strong class="text-white">diagnóstico personalizado</strong> em até 48 horas.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-2 md:gap-4 mt-2 md:mt-3 text-[9px] md:text-xs text-slate-500">
+                        <span><i class="fa-regular fa-clock text-cyber-cyan"></i> 5-8 min</span>
+                        <span><i class="fa-solid fa-lock text-cyber-emerald"></i> Confidencial</span>
+                        <span><i class="fa-solid fa-handshake text-cyber-cyan"></i> Sem compromisso</span>
+                    </div>
+                    <button onclick="goToSlide(13)" class="mt-2 md:mt-3 text-[9px] md:text-xs text-cyber-cyan hover:text-cyber-cyan/70 transition-all">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Voltar
+                    </button>
+                </div>
+
+                <form id="diagnosticForm" class="space-y-4 md:space-y-6">
+
+                    <!-- SEÇÃO 1 -->
+                    <div class="form-card bg-cyber-800/30 border border-cyber-700/50 rounded-2xl p-4 md:p-6">
+                        <div class="flex items-center gap-2 md:gap-3 mb-3 md:mb-5">
+                            <div class="w-6 h-6 md:w-8 md:h-8 rounded-lg bg-cyber-cyan/15 flex items-center justify-center text-cyber-cyan text-[10px] md:text-sm font-mono font-bold">01</div>
+                            <h3 class="text-base md:text-lg font-bold text-white">Dados da Empresa</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                            <div>
+                                <label class="block text-[9px] md:text-xs font-mono text-slate-400 uppercase tracking-wider mb-1 md:mb-1.5">Nome da Empresa *</label>
+                                <input type="text" id="nomeEmpresa" required class="w-full bg-cyber-900/60 border border-cyber-700 rounded-xl px-3 md:px-4 py-2 md:py-3 text-white placeholder-slate-500 text-xs md:text-sm input-focus transition-all" placeholder="Ex: TechNova">
+                            </div>
+                            <div>
+                                <label class="block text-[9px] md:text-xs font-mono text-slate-400 uppercase tracking-wider mb-1 md:mb-1.5">Setor *</label>
+                                <select id="setor" required class="w-full bg-cyber-900/60 border border-cyber-700 rounded-xl px-3 md:px-4 py-2 md:py-3 text-white text-xs md:text-sm input-focus transition-all appearance-none">
+                                    <option value="">Selecione...</option>
+                                    <option value="financeiro">Financeiro / Bancário</option>
+                                    <option value="saude">Saúde / Hospitalar</option>
+                                    <option value="varejo">Varejo / E-commerce</option>
+                                    <option value="tecnologia">Tecnologia / SaaS</option>
+                                    <option value="educacao">Educação / Ensino</option>
+                                    <option value="industria">Indústria / Manufatura</option>
+                                    <option value="servicos">Serviços / Consultoria</option>
+                                    <option value="outro">Outro</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[9px] md:text-xs font-mono text-slate-400 uppercase tracking-wider mb-1 md:mb-1.5">Funcionários *</label>
+                                <select id="funcionarios" required class="w-full bg-cyber-900/60 border border-cyber-700 rounded-xl px-3 md:px-4 py-2 md:py-3 text-white text-xs md:text-sm input-focus transition-all appearance-none">
+                                    <option value="">Selecione...</option>
+                                    <option value="1-10">1 - 10</option>
+                                    <option value="11-50">11 - 50</option>
+                                    <option value="51-200">51 - 200</option>
+                                    <option value="201-500">201 - 500</option>
+                                    <option value="501+">501+</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[9px] md:text-xs font-mono text-slate-400 uppercase tracking-wider mb-1 md:mb-1.5">Site / Domínio</label>
+                                <input type="text" id="site" class="w-full bg-cyber-900/60 border border-cyber-700 rounded-xl px-3 md:px-4 py-2 md:py-3 text-white placeholder-slate-500 text-xs md:text-sm input-focus transition-all" placeholder="suaempresa.com.br">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEÇÃO 2 -->
+                    <div class="form-card bg-cyber-800/30 border border-cyber-700/50 rounded-2xl p-4 md:p-6">
+                        <div class="flex items-center gap-2 md:gap-3 mb-3 md:mb-5">
+                            <div class="w-6 h-6 md:w-8 md:h-8 rounded-lg bg-cyber-cyan/15 flex items-center justify-center text-cyber-cyan text-[10px] md:text-sm font-mono font-bold">02</div>
+                            <h3 class="text-base md:text-lg font-bold text-white">Dados do Responsável</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                            <div>
+                                <label class="block text-[9px] md:text-xs font-mono text-slate-400 uppercase tracking-wider mb-1 md:mb-1.5">Nome Completo *</label>
+                                <input type="text" id="nomeResponsavel" required class="w-full bg-cyber-900/60 border border-cyber-700 rounded-xl px-3 md:px-4 py-2 md:py-3 text-white placeholder-slate-500 text-xs md:text-sm input-focus transition-all" placeholder="João Silva">
+                            </div>
+                            <div>
+                                <label class="block text-[9px] md:text-xs font-mono text-slate-400 uppercase tracking-wider mb-1 md:mb-1.5">Cargo *</label>
+                                <input type="text" id="cargo" required class="w-full bg-cyber-900/60 border border-cyber-700 rounded-xl px-3 md:px-4 py-2 md:py-3 text-white placeholder-slate-500 text-xs md:text-sm input-focus transition-all" placeholder="Diretor / CEO">
+                            </div>
+                            <div>
+                                <label class="block text-[9px] md:text-xs font-mono text-slate-400 uppercase tracking-wider mb-1 md:mb-1.5">E-mail *</label>
+                                <input type="email" id="email" required class="w-full bg-cyber-900/60 border border-cyber-700 rounded-xl px-3 md:px-4 py-2 md:py-3 text-white placeholder-slate-500 text-xs md:text-sm input-focus transition-all" placeholder="joao@empresa.com">
+                            </div>
+                            <div>
+                                <label class="block text-[9px] md:text-xs font-mono text-slate-400 uppercase tracking-wider mb-1 md:mb-1.5">WhatsApp *</label>
+                                <input type="tel" id="telefone" required class="w-full bg-cyber-900/60 border border-cyber-700 rounded-xl px-3 md:px-4 py-2 md:py-3 text-white placeholder-slate-500 text-xs md:text-sm input-focus transition-all" placeholder="(41) 99999-9999">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEÇÃO 3: PERGUNTAS -->
+                    <div class="form-card bg-cyber-800/30 border border-cyber-700/50 rounded-2xl p-4 md:p-6">
+                        <div class="flex items-center gap-2 md:gap-3 mb-3 md:mb-5">
+                            <div class="w-6 h-6 md:w-8 md:h-8 rounded-lg bg-cyber-cyan/15 flex items-center justify-center text-cyber-cyan text-[10px] md:text-sm font-mono font-bold">03</div>
+                            <h3 class="text-base md:text-lg font-bold text-white">Avaliação de Segurança</h3>
+                        </div>
+
+                        <!-- Pergunta 1 -->
+                        <div class="mb-4 md:mb-5 pb-3 md:pb-5 border-b border-cyber-800">
+                            <p class="text-xs md:text-sm font-medium text-white mb-2 md:mb-3">1. Sua empresa já sofreu algum ataque cibernético?</p>
+                            <div class="radio-group flex flex-wrap gap-2 md:gap-3">
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="incidente" value="sim" class="hidden">
+                                    <span class="text-slate-300">Sim</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="incidente" value="nao" class="hidden">
+                                    <span class="text-slate-300">Não</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="incidente" value="nao_sei" class="hidden">
+                                    <span class="text-slate-300">Não sei</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 2 -->
+                        <div class="mb-4 md:mb-5 pb-3 md:pb-5 border-b border-cyber-800">
+                            <p class="text-xs md:text-sm font-medium text-white mb-2 md:mb-3">2. Como sua empresa gerencia as senhas?</p>
+                            <div class="radio-group flex flex-wrap gap-2 md:gap-3">
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="senhas" value="gerenciador" class="hidden">
+                                    <span class="text-slate-300">Gerenciador</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="senhas" value="planilha" class="hidden">
+                                    <span class="text-slate-300">Planilha</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="senhas" value="papel" class="hidden">
+                                    <span class="text-slate-300">Anotado em papel</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="senhas" value="nao_sei" class="hidden">
+                                    <span class="text-slate-300">Não sei</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 3 -->
+                        <div class="mb-4 md:mb-5 pb-3 md:pb-5 border-b border-cyber-800">
+                            <p class="text-xs md:text-sm font-medium text-white mb-2 md:mb-3">3. Todos usam e-mail corporativo?</p>
+                            <div class="radio-group flex flex-wrap gap-2 md:gap-3">
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="email_corporativo" value="sim" class="hidden">
+                                    <span class="text-slate-300">Sim, todos</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="email_corporativo" value="parcial" class="hidden">
+                                    <span class="text-slate-300">Alguns usam pessoal</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="email_corporativo" value="nao" class="hidden">
+                                    <span class="text-slate-300">Usam e-mails pessoais</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 4 -->
+                        <div class="mb-4 md:mb-5 pb-3 md:pb-5 border-b border-cyber-800">
+                            <p class="text-xs md:text-sm font-medium text-white mb-2 md:mb-3">4. Os dados importantes estão criptografados?</p>
+                            <div class="radio-group flex flex-wrap gap-2 md:gap-3">
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="criptografia" value="sim" class="hidden">
+                                    <span class="text-slate-300">Sim</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="criptografia" value="nao" class="hidden">
+                                    <span class="text-slate-300">Não</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="criptografia" value="nao_sei" class="hidden">
+                                    <span class="text-slate-300">Não sei</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 5 -->
+                        <div class="mb-4 md:mb-5 pb-3 md:pb-5 border-b border-cyber-800">
+                            <p class="text-xs md:text-sm font-medium text-white mb-2 md:mb-3">5. Os funcionários receberam treinamento de segurança?</p>
+                            <div class="radio-group flex flex-wrap gap-2 md:gap-3">
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="treinamento" value="sim" class="hidden">
+                                    <span class="text-slate-300">Recentemente</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="treinamento" value="antigo" class="hidden">
+                                    <span class="text-slate-300">Há mais de 1 ano</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="treinamento" value="nao" class="hidden">
+                                    <span class="text-slate-300">Nunca receberam</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 6 -->
+                        <div class="mb-4 md:mb-5 pb-3 md:pb-5 border-b border-cyber-800">
+                            <p class="text-xs md:text-sm font-medium text-white mb-2 md:mb-3">6. Sua empresa possui firewall ativo?</p>
+                            <div class="radio-group flex flex-wrap gap-2 md:gap-3">
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="firewall" value="sim" class="hidden">
+                                    <span class="text-slate-300">Sim</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="firewall" value="nao" class="hidden">
+                                    <span class="text-slate-300">Não</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                                <label class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-cyber-700 hover:border-cyber-cyan/50 transition-all relative text-xs md:text-sm">
+                                    <input type="radio" name="firewall" value="nao_sei" class="hidden">
+                                    <span class="text-slate-300">Não sei</span>
+                                    <span class="radio-bg absolute inset-0 rounded-xl -z-10 transition-all"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 7 -->
+                        <div>
+                            <p class="text-xs md:text-sm font-medium text-white mb-2 md:mb-3">7. Qual seu maior medo sobre segurança digital?</p>
+                            <textarea id="medo" class="w-full bg-cyber-900/60 border border-cyber-700 rounded-xl px-3 md:px-4 py-2 md:py-3 text-white placeholder-slate-500 text-xs md:text-sm input-focus transition-all min-h-[60px] md:min-h-[80px]" placeholder="Ex: Ransomware, perda de dados, multas LGPD..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- SEÇÃO 4 -->
+                    <div class="form-card bg-cyber-800/30 border border-cyber-700/50 rounded-2xl p-4 md:p-6">
+                        <div class="flex items-center gap-2 md:gap-3 mb-3 md:mb-5">
+                            <div class="w-6 h-6 md:w-8 md:h-8 rounded-lg bg-cyber-cyan/15 flex items-center justify-center text-cyber-cyan text-[10px] md:text-sm font-mono font-bold">04</div>
+                            <h3 class="text-base md:text-lg font-bold text-white">Informações Adicionais</h3>
+                        </div>
+
+                        <div class="mb-3 md:mb-4">
+                            <label class="block text-[9px] md:text-xs font-mono text-slate-400 uppercase tracking-wider mb-1 md:mb-1.5">Como prefere receber o diagnóstico?</label>
+                            <select id="preferencia" class="w-full bg-cyber-900/60 border border-cyber-700 rounded-xl px-3 md:px-4 py-2 md:py-3 text-white text-xs md:text-sm input-focus transition-all appearance-none">
+                                <option value="email">Por e-mail (PDF)</option>
+                                <option value="whatsapp">Por WhatsApp (resumo)</option>
+                                <option value="reuniao">Reunião online</option>
+                                <option value="todos">Todos os formatos</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-[9px] md:text-xs font-mono text-slate-400 uppercase tracking-wider mb-1 md:mb-1.5">Observação (opcional)</label>
+                            <textarea id="observacao" class="w-full bg-cyber-900/60 border border-cyber-700 rounded-xl px-3 md:px-4 py-2 md:py-3 text-white placeholder-slate-500 text-xs md:text-sm input-focus transition-all min-h-[50px] md:min-h-[60px]" placeholder="Algo que gostaria de compartilhar..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- BOTÃO ENVIAR -->
+                    <div class="text-center pt-2 md:pt-4">
+                        <button type="submit" class="btn-click px-6 md:px-10 py-3 md:py-4 bg-gradient-to-r from-cyber-emerald to-cyber-cyan text-cyber-950 font-bold rounded-xl shadow-lg shadow-cyber-cyan/20 hover:shadow-cyber-cyan/40 transition-all flex items-center gap-2 md:gap-3 mx-auto pulse-soft text-sm md:text-base">
+                            <i class="fa-solid fa-paper-plane"></i> ENVIAR QUESTIONÁRIO
+                        </button>
+                        <p class="text-[9px] md:text-xs text-slate-500 mt-3 md:mt-4">
+                            <i class="fa-solid fa-lock text-cyber-emerald mr-1"></i>
+                            Respostas 100% confidenciais - LGPD
+                        </p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="w-full max-w-7xl mx-auto px-3 md:px-6 py-3 md:py-4 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4 z-10 border-t border-cyber-800/40">
+        <div class="flex items-center gap-2 md:gap-4">
+            <button onclick="prevSlide()" class="btn-click w-9 h-9 md:w-11 md:h-11 bg-cyber-800 hover:bg-cyber-700 text-white rounded-xl flex items-center justify-center border border-cyber-700 transition-all hover:border-cyber-cyan active:scale-95">
+                <i class="fa-solid fa-arrow-left text-sm md:text-base"></i>
+            </button>
+            <span class="text-[10px] md:text-sm font-mono text-slate-400"><span id="currentSlideLabel" class="text-white font-bold">1</span> / <span id="totalSlidesLabel">14</span></span>
+            <button onclick="nextSlide()" class="btn-click w-9 h-9 md:w-11 md:h-11 bg-cyber-600 hover:bg-cyber-500 text-white rounded-xl flex items-center justify-center border border-cyber-500 shadow-neon-blue transition-all active:scale-95">
+                <i class="fa-solid fa-arrow-right text-sm md:text-base"></i>
+            </button>
+            <button onclick="toggleAutoPlay()" id="autoplay-btn" class="btn-click w-9 h-9 md:w-11 md:h-11 bg-cyber-800 hover:bg-cyber-700 text-white rounded-xl flex items-center justify-center border border-cyber-700 transition-all hover:border-cyber-cyan active:scale-95" title="Apresentação automática">
+                <i class="fa-solid fa-play text-sm md:text-base"></i>
+            </button>
+        </div>
+
+        <div class="hidden lg:flex items-center gap-4 text-[9px] md:text-[11px] font-mono text-slate-500">
+            <span>Setas <kbd class="px-1.5 py-0.5 bg-cyber-800 rounded border border-cyber-700 text-slate-300">←</kbd> <kbd class="px-1.5 py-0.5 bg-cyber-800 rounded border border-cyber-700 text-slate-300">→</kbd></span>
+        </div>
+
+        <div class="text-[9px] md:text-xs text-slate-500 font-mono">
+            &copy; 2026 CYBERTECNICA
+        </div>
+    </footer>
+
+    <!-- ====== WHATSAPP FLUTUANTE ====== -->
+    <a href="https://wa.me/5541998548591?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20Cybertecnica." 
+       target="_blank" 
+       class="fixed bottom-5 md:bottom-6 right-5 md:right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-3 md:p-4 rounded-full shadow-2xl shadow-green-500/30 transition-all hover:scale-110"
+       title="Fale conosco no WhatsApp">
+        <i class="fa-brands fa-whatsapp text-xl md:text-2xl"></i>
+    </a>
+
+    <!-- ====== GRID OVERLAY ====== -->
+    <div id="gridOverview" class="fixed inset-0 bg-cyber-950/95 z-50 p-4 md:p-8 hidden flex-col justify-center overflow-y-auto custom-scroll">
+        <div class="max-w-4xl mx-auto w-full">
+            <div class="flex justify-between items-center mb-4 md:mb-8 border-b border-cyber-850 pb-3 md:pb-4">
+                <h3 class="text-xl md:text-2xl font-bold text-white"><i class="fa-solid fa-grip-vertical mr-2 md:mr-3 text-cyber-cyan"></i> Seletor de Slides</h3>
+                <button onclick="toggleGridOverview()" class="btn-click p-2 bg-cyber-800 hover:bg-cyber-rose/20 text-slate-300 hover:text-cyber-rose rounded-lg transition-all">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4" id="overviewGridContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        // ====== CONFIGURAÇÃO ======
+        let currentSlide = 1;
+        const totalSlides = 14;
+
+        const slidesData = [
+            { id: 1, title: "Capa" },
+            { id: 2, title: "Riscos" },
+            { id: 3, title: "Impactos" },
+            { id: 4, title: "Quem Somos" },
+            { id: 5, title: "Pilares" },
+            { id: 6, title: "Vulnerabilidades" },
+            { id: 7, title: "E-mails" },
+            { id: 8, title: "Firewall" },
+            { id: 9, title: "Criptografia" },
+            { id: 10, title: "Treinamentos" },
+            { id: 11, title: "Diferenciais" },
+            { id: 12, title: "Credibilidade" },
+            { id: 13, title: "Contato" },
+            { id: 14, title: "Questionário" }
+        ];
+
+        // ====== INICIALIZAÇÃO ======
+        window.addEventListener('DOMContentLoaded', function() {
+            renderGridOverview();
+            setupTouchGestures();
+            document.getElementById('totalSlidesLabel').innerText = totalSlides;
+            startTimer();
+            
+            // Fix para Safari - garantir que o body tenha altura correta
+            document.body.style.minHeight = '100vh';
+            document.body.style.minHeight = '100dvh';
+        });
+
+        // ====== NAVEGAÇÃO ======
+        function updateSlideView() {
+            for (let i = 1; i <= totalSlides; i++) {
+                var s = document.getElementById('slide-' + i);
+                if (s) s.classList.remove('active');
+            }
+            var activeSlide = document.getElementById('slide-' + currentSlide);
+            if (activeSlide) activeSlide.classList.add('active');
+
+            document.getElementById('currentSlideLabel').innerText = currentSlide;
+            var percentage = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = percentage + '%';
+
+            // Scroll para o topo do slide 14 (questionário) quando ativado
+            if (currentSlide === 14) {
+                setTimeout(function() {
+                    var main = document.querySelector('main');
+                    if (main) main.scrollTop = 0;
+                    var slide14 = document.getElementById('slide-14');
+                    if (slide14) slide14.scrollTop = 0;
+                }, 100);
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlideView();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlideView();
+            }
+        }
+
+        function goToSlide(slideNum) {
+            if (slideNum >= 1 && slideNum <= totalSlides) {
+                currentSlide = slideNum;
+                updateSlideView();
+            }
+            var overview = document.getElementById('gridOverview');
+            if (overview && !overview.classList.contains('hidden')) toggleGridOverview();
+        }
+
+        // ====== TECLADO ======
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'Escape') {
+                var overview = document.getElementById('gridOverview');
+                if (overview && !overview.classList.contains('hidden')) toggleGridOverview();
+            }
+        });
+
+        // ====== GRID OVERVIEW ======
+        function toggleGridOverview() {
+            var overview = document.getElementById('gridOverview');
+            overview.classList.toggle('hidden');
+            overview.classList.toggle('flex');
+        }
+
+        function renderGridOverview() {
+            var container = document.getElementById('overviewGridContainer');
+            container.innerHTML = '';
+            slidesData.forEach(function(slide) {
+                var btn = document.createElement('button');
+                btn.className = 'bg-cyber-800/80 hover:bg-cyber-700 border border-cyber-700 hover:border-cyber-cyan p-3 md:p-4 rounded-xl text-left transition-all flex flex-col justify-between h-20 md:h-28';
+                btn.onclick = function() { goToSlide(slide.id); };
+                btn.innerHTML = '<span class="text-xl md:text-2xl font-bold font-mono text-cyber-cyan">' + slide.id + '</span><span class="text-[10px] md:text-xs font-semibold text-white leading-snug">' + slide.title + '</span>';
+                container.appendChild(btn);
+            });
+        }
+
+        // ====== AUTOPLAY ======
+        var autoplayInterval = null;
+        var isAutoplaying = false;
+
+        function toggleAutoPlay() {
+            var btn = document.getElementById('autoplay-btn');
+            if (isAutoplaying) {
+                clearInterval(autoplayInterval);
+                isAutoplaying = false;
+                btn.innerHTML = '<i class="fa-solid fa-play"></i>';
+            } else {
+                autoplayInterval = setInterval(function() {
+                    if (currentSlide < totalSlides) {
+                        nextSlide();
+                    } else {
+                        toggleAutoPlay();
+                    }
+                }, 5000);
+                isAutoplaying = true;
+                btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            }
+        }
+
+        // ====== SIMULAÇÕES ======
+        function simulateNmapScan() {
+            var terminal = document.getElementById('terminal-screen');
+            terminal.innerHTML = '<p class="text-slate-500 animate-pulse">Running scan...</p>';
+            setTimeout(function() {
+                terminal.innerHTML = `
+                    <p class="text-slate-400">> nmap -sS -p- 192.168.1.104</p>
+                    <p class="text-slate-500">Initiating SYN Stealth Scan</p>
+                    <p class="text-cyber-emerald">[i] Scanning 65535 ports...</p>
+                    <p class="text-cyber-cyan">[+] Port 80/tcp open (http)</p>
+                    <p class="text-cyber-cyan">[+] Port 443/tcp open (https)</p>
+                    <p class="text-cyber-emerald">[i] Outras portas estão filtradas.</p>
+                    <p class="text-white mt-2 md:mt-4 font-bold border-t border-cyber-900 pt-1 md:pt-2 text-[9px] md:text-xs">Diagnóstico:</p>
+                    <p class="text-cyber-emerald font-semibold text-[9px] md:text-xs">Superfície de ataque externa está ótima.</p>
+                `;
+            }, 1200);
+        }
+
+        var isEncrypted = false;
+
+        function toggleVaultCriptografia() {
+            var btn = document.getElementById('vault-btn');
+            var icon = document.getElementById('vault-icon');
+            var box = document.getElementById('vault-status-box');
+            var statusText = document.getElementById('vault-status-text');
+
+            isEncrypted = !isEncrypted;
+
+            if (isEncrypted) {
+                icon.className = "fa-solid fa-lock-open text-cyber-emerald text-3xl md:text-4xl transform scale-110";
+                setTimeout(function() {
+                    icon.className = "fa-solid fa-vault text-cyber-emerald text-3xl md:text-4xl";
+                }, 200);
+                box.className = "p-3 md:p-4 bg-cyber-emerald/5 border border-cyber-emerald/20 rounded-xl max-w-md mx-auto mb-4 md:mb-6";
+                statusText.innerText = "CRIPTOGRAFADO";
+                statusText.className = "text-cyber-emerald font-bold";
+                btn.innerText = "ABRIR COFRE";
+                btn.className = "btn-click px-4 md:px-6 py-2 md:py-3 bg-cyber-emerald text-cyber-950 font-bold rounded-xl shadow-lg hover:bg-emerald-400 transition-all font-mono text-[10px] md:text-sm";
+            } else {
+                icon.className = "fa-solid fa-lock text-cyber-rose text-3xl md:text-4xl";
+                box.className = "p-3 md:p-4 bg-cyber-rose/5 border border-cyber-rose/20 rounded-xl max-w-md mx-auto mb-4 md:mb-6";
+                statusText.innerText = "DESBLINDADO";
+                statusText.className = "text-cyber-rose font-bold";
+                btn.innerText = "ATIVAR BLINDAGEM AES-256";
+                btn.className = "btn-click px-4 md:px-6 py-2 md:py-3 bg-cyber-cyan text-cyber-950 font-bold rounded-xl shadow-lg hover:bg-cyber-400 transition-all font-mono text-[10px] md:text-sm";
+            }
+        }
+
+        // ====== TOUCH (Swipe) ======
+        var touchstartX = 0;
+        var touchendX = 0;
+
+        function setupTouchGestures() {
+            document.addEventListener('touchstart', function(e) {
+                touchstartX = e.changedTouches[0].screenX;
+            });
+            document.addEventListener('touchend', function(e) {
+                touchendX = e.changedTouches[0].screenX;
+                if (touchendX < touchstartX - 60) nextSlide();
+                if (touchendX > touchstartX + 60) prevSlide();
+            });
+        }
+
+        // ====== TIMER ======
+        var timeLeft = 24 * 60 * 60;
+
+        function startTimer() {
+            updateTimerDisplay();
+            setInterval(function() {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    updateTimerDisplay();
+                } else {
+                    var container = document.getElementById('timer-container');
+                    if (container) {
+                        container.innerHTML = '<i class="fa-solid fa-fire text-cyber-rose"></i><span class="font-bold text-cyber-rose">ÚLTIMAS VAGAS</span><span class="text-slate-300">— Diagnóstico ainda disponível!</span>';
+                    }
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            var hours = Math.floor(timeLeft / 3600);
+            var minutes = Math.floor((timeLeft % 3600) / 60);
+            var seconds = timeLeft % 60;
+            var timerEl = document.getElementById('countdown-timer');
+            if (timerEl) {
+                timerEl.textContent = String(hours).padStart(2, '0') + ':' + String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+            }
+        }
+
+        // ====== ENVIO QUESTIONÁRIO (SEM EMOJIS) ======
+        document.getElementById('diagnosticForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Validação dos campos obrigatórios
+            var requiredFields = this.querySelectorAll('[required]');
+            var isValid = true;
+            requiredFields.forEach(function(field) {
+                if (!field.value.trim()) {
+                    field.classList.add('border-cyber-rose');
+                    isValid = false;
+                } else {
+                    field.classList.remove('border-cyber-rose');
+                }
+            });
+
+            if (!isValid) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+
+            // Verificar perguntas respondidas
+            var radioGroups = ['incidente', 'senhas', 'email_corporativo', 'criptografia', 'treinamento', 'firewall'];
+            var missingRadios = false;
+            var respostas = {};
+            radioGroups.forEach(function(name) {
+                var checked = document.querySelector('input[name="' + name + '"]:checked');
+                if (checked) {
+                    respostas[name] = checked.value;
+                } else {
+                    missingRadios = true;
+                }
+            });
+
+            if (missingRadios) {
+                alert('Por favor, responda todas as perguntas de segurança.');
+                return;
+            }
+
+            // Capturar campos
+            var nomeEmpresa = document.getElementById('nomeEmpresa').value || '';
+            var setor = document.getElementById('setor').value || '';
+            var funcionarios = document.getElementById('funcionarios').value || '';
+            var site = document.getElementById('site').value || '';
+            var nomeResponsavel = document.getElementById('nomeResponsavel').value || '';
+            var cargo = document.getElementById('cargo').value || '';
+            var email = document.getElementById('email').value || '';
+            var telefone = document.getElementById('telefone').value || '';
+            var preferencia = document.getElementById('preferencia').value || '';
+            var medo = document.getElementById('medo').value || '';
+            var observacao = document.getElementById('observacao').value || '';
+
+            // Mapeamentos
+            var mapaRespostas = {
+                'incidente': { 'sim': '[OK] Já sofreu ataque', 'nao': '[OK] Nunca sofreu', 'nao_sei': '[?] Não sabe' },
+                'senhas': { 'gerenciador': '[OK] Gerenciador', 'planilha': '[!] Planilha', 'papel': '[X] Papel', 'nao_sei': '[?] Não sabe' },
+                'email_corporativo': { 'sim': '[OK] Todos corporativo', 'parcial': '[!] Alguns pessoal', 'nao': '[X] E-mails pessoais' },
+                'criptografia': { 'sim': '[OK] Criptografados', 'nao': '[X] NÃO criptografados', 'nao_sei': '[?] Não sabe' },
+                'treinamento': { 'sim': '[OK] Treinamento recente', 'antigo': '[!] Há mais de 1 ano', 'nao': '[X] NUNCA receberam' },
+                'firewall': { 'sim': '[OK] Possui firewall', 'nao': '[X] NÃO possui firewall', 'nao_sei': '[?] Não sabe' }
+            };
+
+            var labels = {
+                'incidente': 'Incidente cibernético',
+                'senhas': 'Gerenciamento de senhas',
+                'email_corporativo': 'E-mail corporativo',
+                'criptografia': 'Criptografia de dados',
+                'treinamento': 'Treinamento de equipe',
+                'firewall': 'Firewall ativo'
+            };
+
+            var setorMap = {
+                'financeiro': 'Financeiro / Bancario',
+                'saude': 'Saude / Hospitalar',
+                'varejo': 'Varejo / E-commerce',
+                'tecnologia': 'Tecnologia / SaaS',
+                'educacao': 'Educacao / Ensino',
+                'industria': 'Industria / Manufatura',
+                'servicos': 'Servicos / Consultoria',
+                'outro': 'Outro'
+            };
+
+            var funcMap = {
+                '1-10': '1 - 10',
+                '11-50': '11 - 50',
+                '51-200': '51 - 200',
+                '201-500': '201 - 500',
+                '501+': '501+'
+            };
+
+            var prefMap = {
+                'email': '[E-MAIL] PDF',
+                'whatsapp': '[WHATSAPP] Resumo',
+                'reuniao': '[REUNIAO] Online',
+                'todos': '[TODOS] Todos formatos'
+            };
+
+            // Montar mensagem
+            var mensagem = '[DIAGNOSTICO CYBERTECNICA - RESPOSTAS]\n\n';
+            mensagem += '[EMPRESA] DADOS DA EMPRESA\n';
+            mensagem += 'Empresa: ' + (nomeEmpresa || 'Nao informado') + '\n';
+            mensagem += 'Setor: ' + (setorMap[setor] || setor || 'Nao informado') + '\n';
+            mensagem += 'Funcionarios: ' + (funcMap[funcionarios] || funcionarios || 'Nao informado') + '\n';
+            mensagem += 'Site: ' + (site || 'Nao informado') + '\n\n';
+
+            mensagem += '[RESPONSAVEL] DADOS DO RESPONSAVEL\n';
+            mensagem += 'Nome: ' + (nomeResponsavel || 'Nao informado') + '\n';
+            mensagem += 'Cargo: ' + (cargo || 'Nao informado') + '\n';
+            mensagem += 'E-mail: ' + (email || 'Nao informado') + '\n';
+            mensagem += 'WhatsApp: ' + (telefone || 'Nao informado') + '\n\n';
+
+            mensagem += '[SEGURANCA] AVALIACAO\n';
+            for (var key in respostas) {
+                if (respostas.hasOwnProperty(key)) {
+                    var label = labels[key] || key;
+                    var texto = mapaRespostas[key] ? mapaRespostas[key][respostas[key]] : respostas[key];
+                    mensagem += label + ': ' + texto + '\n';
+                }
+            }
+
+            mensagem += '\n[PREOCUPACAO] MAIOR MEDO\n' + (medo || 'Nao informado') + '\n\n';
+
+            mensagem += '[CONTATO] PREFERENCIA\n';
+            mensagem += prefMap[preferencia] || preferencia || 'Nao informado';
+
+            if (observacao) {
+                mensagem += '\n\n[OBSERVACAO]\n' + observacao;
+            }
+
+            mensagem += '\n\n---\n[PROXIMO PASSO] Agendar analise.';
+
+            // Enviar para WhatsApp
+            var url = 'https://wa.me/5541998548591?text=' + encodeURIComponent(mensagem);
+            window.open(url, '_blank');
+
+            // Feedback visual
+            var btn = this.querySelector('button[type="submit"]');
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> ENVIADO!';
+            btn.classList.remove('from-cyber-emerald', 'to-cyber-cyan', 'pulse-soft');
+            btn.classList.add('from-cyber-emerald', 'to-cyber-emerald', 'opacity-70');
+            btn.disabled = true;
+
+            // Mensagem de agradecimento
+            var thankYou = document.createElement('div');
+            thankYou.className = 'mt-4 md:mt-6 p-3 md:p-4 bg-cyber-emerald/10 border border-cyber-emerald/20 rounded-xl max-w-lg mx-auto';
+            thankYou.innerHTML = '<div class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-cyber-emerald text-xl md:text-2xl"></i><div class="text-left"><p class="text-xs md:text-sm font-bold text-white">Enviado com sucesso!</p><p class="text-[9px] md:text-xs text-slate-400">WhatsApp aberto. Clique em enviar.</p><button onclick="goToSlide(13)" class="mt-1 md:mt-2 text-[9px] md:text-xs text-cyber-cyan hover:text-cyber-cyan/70 transition-all"><i class="fa-solid fa-arrow-left mr-1"></i> Voltar</button></div></div>';
+            this.parentNode.insertBefore(thankYou, this.nextSibling);
+        });
+
+        // ====== EFEITO RADIO ======
+        document.querySelectorAll('.radio-group input[type="radio"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                var group = this.closest('.radio-group');
+                group.querySelectorAll('label').forEach(function(label) {
+                    label.classList.remove('border-cyber-cyan', 'bg-cyber-cyan/10');
+                });
+                if (this.checked) {
+                    var label = this.closest('label');
+                    label.classList.add('border-cyber-cyan', 'bg-cyber-cyan/10');
+                }
+            });
+        });
+
+        // ====== VALIDAÇÃO ======
+        document.querySelectorAll('[required]').forEach(function(field) {
+            field.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    this.classList.add('border-cyber-rose');
+                } else {
+                    this.classList.remove('border-cyber-rose');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
